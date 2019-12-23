@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <Title>Raw jQuery - Form</Title>
+</head>
+<body>
+    <div id="element">
+        Loading...
+    </div>
+    <script src="jquery.js"></script>
+    <script src="../cleverform.js"></script>
+</body>
+</html>
+
+<script>
+var Form = undefined; 
+
+$(document).ready(function() {
+    // create a new instance of the plugin
+    Form = $('#element').CleverForm({Title: "jQuery Example Form", name: "default",
+        form: [
+            {Class: "", Name:"Name", Title:"First Name", readonly: true},
+            {Class: "", Name:"Surname", Title:"Surname", readonly: true},
+            {Class: "", Name:"Email", Title:"eMail Address", type:"email", required:true},            
+            {Class: "", Name:"Phone", Title:"Phone Number", type:"phone"},            
+            {Class: "", Name:"Birthday", Title:"Birthdate", type:"date"},
+            {Name: "Selection", Title: "Selection", type: "select", options: "lookup.json" }
+        ],
+        onFormSubmit: function(data) {
+            console.log(data);
+            return false;
+        }});
+    Show();
+});
+
+function Show()
+{
+    Form.ShowForm({Name: "John", Surname: "doe", Email: "john@doe.not.com", Phone: "8001234567", Birthday: "1969-10-07", Selection: 2})
+}
+</script>

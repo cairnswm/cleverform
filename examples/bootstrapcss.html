@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <Title>Form Test</Title>
+    <link rel="stylesheet" type="text/css" href="bootstrap.css">
+</head>
+
+<body>
+    <div id="element" class="">
+        Loading...
+    </div>
+    <script src="jquery.js"></script>
+    <script src="../cleverform.js"></script>
+    
+</body>
+</html>
+
+<script>
+    var Form = undefined;
+
+    $(document).ready(function () {
+        // create a new instance of the plugin
+        Form = $('#element').CleverForm({
+            Title: "Bootstrap Example Form", 
+            name: "default", class: "",
+            LabelClass: "",
+            ContainerClass: "",
+            InputClass: "form-control",
+            form: [
+                { Class: "form-control", Name: "Name", Title: "First Name", readonly: true },
+                { Class: "form-control", Name: "Surname", Title: "Surname", readonly: true },
+                { Class: "form-control", Name: "Email", Title: "eMail Address", type: "email", required: true },
+                { Class: "form-control", Name: "Phone", Title: "Phone Number", type: "phone" },
+                { Class: "form-control", Name: "Birthday", Title: "Birthdate", type: "date" },
+                { Class: "form-control", Name: "Selection", Title: "Selection", type: "select", options: "lookup.json" }
+            ],
+            SubmitButton: { Class: "btn btn-primary", Name: "save", label: "Save Button" },
+            onFormSubmit: function (data) {
+                console.log(data);
+            }
+        });
+        Show();
+    });
+
+    function Show() {
+        Form.ShowForm({ Name: "John", Surname: "doe", Email: "john@doe.not.com", Phone: "8001234567", Birthday: "1969-01-01", Selection: 2 })
+    }
+</script>
